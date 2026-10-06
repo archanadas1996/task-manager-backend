@@ -1,0 +1,10 @@
+const ALLOWED_STATUSES = [
+    "TODO",
+    "IN_PROGRESS",
+    "COMPLETED",
+    "CANCELLED"
+];
+
+module.exports = {
+    ALLOWED_STATUSES
+};
