@@ -1,9 +1,5 @@
 const authorizeRoles = (...allowedRoles) => {
   return (req, res, next) => {
-    console.log("ROLE MIDDLEWARE");
-    console.log("USER:", req.user);
-    console.log("ALLOWED ROLES:", allowedRoles);
-
     if (!req.user) {
       return res.status(401).json({
         message: "Authentication required",
@@ -15,8 +11,6 @@ const authorizeRoles = (...allowedRoles) => {
         message: "You do not have permission",
       });
     }
-
-    console.log("ROLE AUTHORIZED");
 
     next();
   };

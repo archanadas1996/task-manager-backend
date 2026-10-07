@@ -39,7 +39,6 @@ const createUser = async (name, email, password) => {
              RETURNING id, name, email, created_at`,
     [name, email, password],
   );
-  console.log("user.rows[0]", user.rows[0]);
   return user.rows[0];
 };
 

@@ -29,24 +29,18 @@ const getProjects = async ({ limit, offset, created_by }) => {
     conditions.push(`p.created_by = $${values.length}`);
   }
 
-  console.log("values", values);
-  console.log("conditions", conditions);
-
   // Add WHERE to data query
   if (conditions.length > 0) {
     dataQuery += ` WHERE ${conditions.join(" AND ")}`;
     countQuery += ` WHERE ${conditions.join(" AND ")}`;
   }
 
-  console.log("dataQuery1", dataQuery);
   dataQuery += `
         ORDER BY p.id
         LIMIT $${values.length + 1}
         OFFSET $${values.length + 2}
     `;
-  console.log("dataQuery2", dataQuery);
   const dataValues = [...values, limit, offset];
-  console.log("dataValues", dataValues);
   const [dataResult, countResult] = await Promise.all([
     pool.query(dataQuery, dataValues),
     pool.query(countQuery, values),

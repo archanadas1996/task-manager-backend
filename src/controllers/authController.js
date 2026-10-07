@@ -114,7 +114,6 @@ const login = async (req, res) => {
     }
 
     const user = await authService.findUserByEmail(email);
-    console.log(user);
 
     if (!user) {
       return res.status(401).json({
@@ -123,9 +122,6 @@ const login = async (req, res) => {
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
-
-    console.log(password);
-    console.log(user.password);
 
     if (!passwordMatch) {
       return res.status(401).json({

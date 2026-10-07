@@ -2,11 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const authenticate = (req, res, next) => {
   try {
-    console.log("AUTH MIDDLEWARE START");
-
     const authHeader = req.headers.authorization;
-
-    console.log("AUTH HEADER:", !!authHeader);
 
     if (!authHeader) {
       return res.status(401).json({
@@ -27,9 +23,6 @@ const authenticate = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET, {
       algorithms: ["HS256"],
     });
-
-    console.log("TOKEN VERIFIED");
-    console.log("USER:", decoded);
 
     req.user = decoded;
 
